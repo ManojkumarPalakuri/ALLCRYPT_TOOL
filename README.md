@@ -8,6 +8,7 @@
 - **Multiple Algorithms**: Dynamically select between AES-128, AES-192, AES-256, and DES.
 - **Password-Derived Keys**: Utilizes `scrypt` to securely hash custom passwords into exact byte-length keys.
 - **Anonymous Auditing**: Logs encryption algorithms and timestamps securely to MongoDB without tracking user identity.
+- **Interactive About Guide**: Includes a built-in Glassmorphism modal explaining fundamental encryption mechanics instantly to new users.
 
 ## Tech Stack
 - **Frontend**: React.js, Vite, Vanilla CSS (Glassmorphism design), Framer Motion, Axios
