@@ -1,6 +1,5 @@
 const express = require('express');
 const crypto = require('crypto');
-const History = require('../models/History');
 
 const router = express.Router();
 
@@ -33,8 +32,6 @@ router.post('/encrypt', async (req, res) => {
     let encrypted = cipher.update(text, 'utf8', 'hex');
     encrypted += cipher.final('hex');
     
-    await History.create({ operationType: 'ENCRYPT', algorithm: details.name });
-    
     // Combining IV and ciphertext
     const resultPayload = iv.toString('hex') + ':' + encrypted;
     
@@ -62,21 +59,9 @@ router.post('/decrypt', async (req, res) => {
     let decrypted = decipher.update(encryptedData, 'hex', 'utf8');
     decrypted += decipher.final('utf8');
     
-    await History.create({ operationType: 'DECRYPT', algorithm: details.name });
-    
     res.json({ result: decrypted });
   } catch (err) {
     res.status(500).json({ message: 'Decryption failed. Invalid password or corrupted data.', error: err.message });
-  }
-});
-
-router.get('/stats', async (req, res) => {
-  try {
-    const total = await History.countDocuments();
-    const recent = await History.find().sort({ timestamp: -1 }).limit(10);
-    res.json({ total, recent });
-  } catch (err) {
-    res.status(500).json({ message: 'Failed to fetch stats' });
   }
 });
 

@@ -7,13 +7,11 @@
 - **Client & Server Integration**: Uses a modern React (Vite) frontend with a Node/Express backend that handles cryptographic buffering safely.
 - **Multiple Algorithms**: Dynamically select between AES-128, AES-192, AES-256, and DES.
 - **Password-Derived Keys**: Utilizes `scrypt` to securely hash custom passwords into exact byte-length keys.
-- **Anonymous Auditing**: Logs encryption algorithms and timestamps securely to MongoDB without tracking user identity.
 - **Interactive About Guide**: Includes a built-in Glassmorphism modal explaining fundamental encryption mechanics instantly to new users.
 
 ## Tech Stack
 - **Frontend**: React.js, Vite, Vanilla CSS (Glassmorphism design), Framer Motion, Axios
-- **Backend**: Node.js, Express.js, native `crypto` API, Mongoose
-- **Database**: MongoDB
+- **Backend**: Node.js, Express.js, native `crypto` API
 
 ## Getting Started
 
@@ -37,7 +35,6 @@ npm install
 In the `server/` directory, ensure your `.env` file has the following configurations:
 ```env
 PORT=5000
-MONGO_URI=mongodb://127.0.0.1:27017/allcrypt_db
 ```
 
 ### 3. Running the Project
