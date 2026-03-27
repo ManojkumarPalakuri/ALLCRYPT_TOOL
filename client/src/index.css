@@ -11,6 +11,23 @@
   --border-glass: rgba(255, 255, 255, 0.05);
   --error: #ef4444;
   --success: #10b981;
+  --terminal-bg: rgba(0,0,0,0.4);
+  --card-bg: rgba(255,255,255,0.03);
+  --modal-bg: rgba(0,0,0,0.6);
+}
+
+[data-theme="light"] {
+  --bg: #f8fafc;
+  --bg-secondary: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  --border-glass: rgba(0, 0, 0, 0.1);
+  --terminal-bg: rgba(241, 245, 249, 0.8);
+  --card-bg: rgba(255, 255, 255, 0.6);
+  --modal-bg: rgba(255, 255, 255, 0.4);
 }
 
 * {
@@ -90,7 +107,7 @@ input, textarea, button, select {
 .input-field {
   width: 100%;
   padding: 0.875rem 1rem;
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: var(--card-bg);
   border: 1px solid var(--border-glass);
   border-radius: 12px;
   color: var(--text-main);
@@ -138,13 +155,13 @@ input, textarea, button, select {
 
 .btn-secondary {
   background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-glass);
   color: var(--text-main);
 }
 
 .btn-secondary:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.2);
+  background-color: var(--card-bg);
+  border-color: rgba(100, 116, 139, 0.3);
 }
 
 .btn-danger {

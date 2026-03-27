@@ -126,7 +126,7 @@ const CryptoTool = () => {
                 flexGrow: 1,
                 minHeight: '16.5rem', 
                 wordBreak: 'break-all', 
-                backgroundColor: 'rgba(0,0,0,0.4)', 
+                backgroundColor: 'var(--terminal-bg)', 
                 position: 'relative',
                 padding: '1.25rem',
                 fontSize: '1rem',

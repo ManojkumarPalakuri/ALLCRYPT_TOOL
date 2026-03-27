@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
-import { Shield, X, Info } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Shield, X, Info, Moon, Sun } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [showAbout, setShowAbout] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
 
   // Close modal when clicking outside
   const handleBackdropClick = (e) => {
@@ -18,8 +28,11 @@ const Navbar = () => {
             <Shield style={{ color: 'var(--primary)' }} size={28} />
             <span>ALLCRYPT</span>
           </div>
-          <nav className="navbar-nav">
-            <button className="btn btn-secondary" onClick={() => setShowAbout(true)} style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+          <nav className="navbar-nav" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+            <button className="btn btn-secondary" onClick={toggleTheme} style={{ display: 'flex', alignItems: 'center', padding: '0.625rem 0.75rem', borderRadius: '50%' }} aria-label="Toggle Theme">
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <button className="btn btn-secondary" onClick={() => setShowAbout(true)} style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', padding: '0.625rem 1rem' }}>
               <Info size={18} /> About
             </button>
           </nav>
@@ -37,7 +50,7 @@ const Navbar = () => {
               left: 0, 
               right: 0, 
               bottom: 0, 
-              backgroundColor: 'rgba(0,0,0,0.6)', 
+              backgroundColor: 'var(--modal-bg)', 
               backdropFilter: 'blur(8px)', 
               zIndex: 100, 
               display: 'flex', 
@@ -82,22 +95,22 @@ const Navbar = () => {
 
                 <h4 style={{ color: '#60a5fa', marginBottom: '1rem', marginTop: '2.5rem', fontSize: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem' }}>Core Features</h4>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
-                  <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', padding: '1.25rem', borderRadius: '12px' }}>
+                  <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border-glass)', padding: '1.25rem', borderRadius: '12px' }}>
                     <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>🚀</div>
                     <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '0.25rem', fontSize: '1rem' }}>Frictionless Access</strong>
                     No logins required. Open the site and instantly encrypt data.
                   </div>
-                  <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', padding: '1.25rem', borderRadius: '12px' }}>
+                  <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border-glass)', padding: '1.25rem', borderRadius: '12px' }}>
                     <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>🔒</div>
                     <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '0.25rem', fontSize: '1rem' }}>AES-256 Default</strong>
                     Features the industry maximum security standard for data at rest.
                   </div>
-                  <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', padding: '1.25rem', borderRadius: '12px' }}>
+                  <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border-glass)', padding: '1.25rem', borderRadius: '12px' }}>
                     <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>💻</div>
                     <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '0.25rem', fontSize: '1rem' }}>scrypt Key Derivation</strong>
                     Passwords are safely hashed into exact cryptographic byte-length streams automatically.
                   </div>
-                  <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', padding: '1.25rem', borderRadius: '12px' }}>
+                  <div style={{ background: 'var(--card-bg)', border: '1px solid var(--border-glass)', padding: '1.25rem', borderRadius: '12px' }}>
                     <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>🎨</div>
                     <strong style={{ color: 'var(--text-main)', display: 'block', marginBottom: '0.25rem', fontSize: '1rem' }}>Premium UX</strong>
                     High-end glassmorphism design with responsive elements and smooth animations.
