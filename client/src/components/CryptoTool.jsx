@@ -57,6 +57,17 @@ const CryptoTool = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const downloadQRCode = () => {
+    const svg = document.getElementById("qr-code-svg");
+    if (!svg) return;
+    const svgData = new XMLSerializer().serializeToString(svg);
+    const url = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgData);
+    const link = document.createElement("a");
+    link.download = "allcrypt_secure_qr.svg";
+    link.href = url;
+    link.click();
+  };
+
   const handleTextProcess = async () => {
     if (!text || !password) return setError('Please enter both text and a secure key/password.');
     setError('');
@@ -253,8 +264,13 @@ const CryptoTool = () => {
                           <strong style={{ color: 'var(--primary)', paddingLeft: '0.5rem', fontFamily: 'monospace' }}>{password}</strong>
                         </p>
                       </div>
-                      <div style={{ background: '#fff', padding: '0.5rem', borderRadius: '8px', border: '4px solid #fff' }}>
-                        <QRCodeSVG value={textResult} size={64} />
+                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+                        <div style={{ background: '#fff', padding: '0.5rem', borderRadius: '8px', border: '4px solid #fff' }}>
+                          <QRCodeSVG value={textResult} size={64} id="qr-code-svg" />
+                        </div>
+                        <button onClick={downloadQRCode} className="btn btn-secondary" style={{ display: 'flex', alignItems: 'center', padding: '0.3rem 0.6rem', fontSize: '0.75rem', width: '100%', justifyContent: 'center' }}>
+                          <DownloadCloud size={14} style={{ marginRight: '0.3rem' }}/> Save QR
+                        </button>
                       </div>
                     </div>
                   )}
