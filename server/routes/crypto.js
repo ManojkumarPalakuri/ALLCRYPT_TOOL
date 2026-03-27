@@ -8,7 +8,6 @@ const getAlgoDetails = (algo) => {
     case 'AES-256': return { name: 'aes-256-cbc', keyLen: 32, ivLen: 16 };
     case 'AES-192': return { name: 'aes-192-cbc', keyLen: 24, ivLen: 16 };
     case 'AES-128': return { name: 'aes-128-cbc', keyLen: 16, ivLen: 16 };
-    case 'DES': return { name: 'des-cbc', keyLen: 8, ivLen: 8 };
     default: return { name: 'aes-256-cbc', keyLen: 32, ivLen: 16 };
   }
 };

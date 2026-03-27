@@ -5,7 +5,7 @@
 ## Features
 - **Open Access**: No login or authentication required. Simply generate a key and encrypt.
 - **Client & Server Integration**: Uses a modern React (Vite) frontend with a Node/Express backend that handles cryptographic buffering safely.
-- **Multiple Algorithms**: Dynamically select between AES-128, AES-192, AES-256, and DES.
+- **Multiple Algorithms**: Dynamically select between AES-128, AES-192, and AES-256.
 - **Password-Derived Keys**: Utilizes `scrypt` to securely hash custom passwords into exact byte-length keys.
 - **Interactive About Guide**: Includes a built-in Glassmorphism modal explaining fundamental encryption mechanics instantly to new users.
 

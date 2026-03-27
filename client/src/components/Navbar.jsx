@@ -75,7 +75,7 @@ const Navbar = () => {
                 <h4 style={{ color: '#60a5fa', marginBottom: '1rem', marginTop: '2rem', fontSize: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem' }}>How It Works</h4>
                 <ul style={{ listStylePosition: 'inside', color: 'var(--text-muted)', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingLeft: '0.5rem' }}>
                   <li><strong style={{ color: 'var(--text-main)' }}>1. Input Data:</strong> Paste or type any plain text you wish to conceal.</li>
-                  <li><strong style={{ color: 'var(--text-main)' }}>2. Select Algorithm:</strong> Choose between robust algorithms like AES-256 or DES.</li>
+                  <li><strong style={{ color: 'var(--text-main)' }}>2. Select Algorithm:</strong> Choose between robust algorithms like AES-256 or AES-128.</li>
                   <li><strong style={{ color: 'var(--text-main)' }}>3. Secure Key:</strong> Type a memorable password or auto-generate a random 16-character key.</li>
                   <li><strong style={{ color: 'var(--text-main)' }}>4. Encrypt & Share:</strong> Share the generated ciphertext block and the exact key with your recipient. Without both factors (Key + Ciphertext), the message remains mathematically impossible to read.</li>
                 </ul>

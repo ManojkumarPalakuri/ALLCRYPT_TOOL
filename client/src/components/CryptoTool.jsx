@@ -13,7 +13,7 @@ const CryptoTool = () => {
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
 
-  const algorithms = ['AES-256', 'AES-192', 'AES-128', 'DES'];
+  const algorithms = ['AES-256', 'AES-192', 'AES-128'];
 
   const generatePassword = () => {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
