@@ -1,5 +1,9 @@
 const express = require('express');
 const crypto = require('crypto');
+const multer = require('multer');
+const fs = require('fs');
+
+const upload = multer({ dest: 'uploads/' });
 
 const router = express.Router();
 
@@ -61,6 +65,75 @@ router.post('/decrypt', async (req, res) => {
     res.json({ result: decrypted });
   } catch (err) {
     res.status(500).json({ message: 'Decryption failed. Invalid password or corrupted data.', error: err.message });
+  }
+});
+
+router.post('/encrypt-file', upload.single('file'), async (req, res) => {
+  const { password, algorithm } = req.body;
+  const file = req.file;
+  try {
+    if (!file || !password) {
+      if (file) fs.unlinkSync(file.path);
+      return res.status(400).json({ message: 'File and password are required' });
+    }
+    const details = getAlgoDetails(algorithm);
+    const key = deriveKey(password, details.keyLen);
+    const iv = crypto.randomBytes(details.ivLen);
+    
+    const cipher = crypto.createCipheriv(details.name, key, iv);
+    const input = fs.createReadStream(file.path);
+    const outputPath = file.path + '.enc';
+    const output = fs.createWriteStream(outputPath);
+    
+    input.pipe(cipher).pipe(output);
+    
+    output.on('finish', () => {
+      res.set('X-Encryption-IV', iv.toString('hex'));
+      res.set('Access-Control-Expose-Headers', 'X-Encryption-IV');
+      res.download(outputPath, `${file.originalname}.enc`, () => {
+        fs.unlinkSync(file.path);
+        fs.unlinkSync(outputPath);
+      });
+    });
+  } catch (err) {
+    if (file && fs.existsSync(file.path)) fs.unlinkSync(file.path);
+    res.status(500).json({ message: 'File encryption failed', error: err.message });
+  }
+});
+
+router.post('/decrypt-file', upload.single('file'), async (req, res) => {
+  const { password, algorithm, iv } = req.body;
+  const file = req.file;
+  try {
+    if (!file || !password || !iv) {
+      if (file) fs.unlinkSync(file.path);
+      return res.status(400).json({ message: 'File, password, and IV are required for decryption' });
+    }
+    const details = getAlgoDetails(algorithm);
+    const key = deriveKey(password, details.keyLen);
+    const decipher = crypto.createDecipheriv(details.name, key, Buffer.from(iv, 'hex'));
+    
+    const input = fs.createReadStream(file.path);
+    let outputFilename = file.originalname.endsWith('.enc') ? file.originalname.slice(0, -4) : file.originalname + '.dec';
+    const outputPath = file.path + '.dec';
+    const output = fs.createWriteStream(outputPath);
+    
+    input.pipe(decipher).pipe(output);
+    
+    output.on('finish', () => {
+      res.download(outputPath, outputFilename, () => {
+        fs.unlinkSync(file.path);
+        fs.unlinkSync(outputPath);
+      });
+    });
+    output.on('error', () => {
+      if (fs.existsSync(outputPath)) fs.unlinkSync(outputPath);
+      if (file && fs.existsSync(file.path)) fs.unlinkSync(file.path);
+      res.status(500).json({ message: 'Decryption failed. Invalid password or IV.' });
+    });
+  } catch (err) {
+    if (file && fs.existsSync(file.path)) fs.unlinkSync(file.path);
+    res.status(500).json({ message: 'File decryption failed', error: err.message });
   }
 });
 
