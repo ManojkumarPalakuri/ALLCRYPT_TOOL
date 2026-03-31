@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, X, Info, Moon, Sun } from 'lucide-react';
+import { Shield, X, Info, Moon, Sun, Link as LinkIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [showAbout, setShowAbout] = useState(false);
@@ -25,10 +26,15 @@ const Navbar = () => {
       <header className="navbar">
         <div className="container navbar-content">
           <div className="navbar-brand">
-            <Shield style={{ color: 'var(--primary)' }} size={28} />
-            <span>ALLCRYPT</span>
+            <Link to="/" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Shield style={{ color: 'var(--primary)' }} size={28} />
+              <span>ALLCRYPT</span>
+            </Link>
           </div>
           <nav className="navbar-nav" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+            <Link to="/redirect-tool" className="btn btn-secondary" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', padding: '0.625rem 1rem', textDecoration: 'none' }}>
+              <LinkIcon size={18} /> Secure URL
+            </Link>
             <button className="btn btn-secondary" onClick={toggleTheme} style={{ display: 'flex', alignItems: 'center', padding: '0.625rem 0.75rem', borderRadius: '50%' }} aria-label="Toggle Theme">
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
