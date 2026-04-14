@@ -1,6 +1,6 @@
 # ALLCRYPT
 
-**ALLCRYPT** is an open, modern MERN-stack encryption utility built for secure data transmission. It features military-grade encryption algorithms (AES-256, AES-192, AES-128, DES) and a stunning premium UI with glassmorphism and dark mode aesthetics. 
+**ALLCRYPT is a MERN-stack encryption tool I developed for secure data transmission, incorporating multiple encryption algorithms such as AES (256/192/128) and DES. The system focuses on secure key handling and provides a user-friendly interface for efficient encryption and decryption workflows.
 
 ## Features
 - **Open Access**: No login or authentication required. Simply generate a key and encrypt.
