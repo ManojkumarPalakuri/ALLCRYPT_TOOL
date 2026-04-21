@@ -11,8 +11,8 @@
 - **Password Strength Meter**: Real-time visual feedback confirming key security and complexity.
 - **QR Code Generation & Download**: Instantly generates scannable QR codes for encrypted text to share via mobile, including an option to download the QR code directly.
 - **Interactive About Guide**: Includes a built-in Glassmorphism modal explaining fundamental encryption mechanics instantly to new users.
-- **Secure URL Option**: Generate secure, sharable URLs to safely transmit encrypted data.
-- **Light & Dark Themes**: Fully implemented theme toggle logic with adaptable CSS variables for a seamless experience in both dark and light modes.
+- **Secure URL Redirection**: Create password-protected, encrypted short links with optional expiration timers and "one-time access" (burn-after-reading) capabilities.
+- **Light & Dark Themes**: Premium UI with a fully functional theme toggle and adaptable CSS variables for a seamless glassmorphism experience.
 
 ## Tech Stack
 - **Frontend**: React.js, Vite, Vanilla CSS (Glassmorphism design), Framer Motion, Axios
@@ -39,8 +39,11 @@ npm install
 ### 2. Configuration
 In the `server/` directory, ensure your `.env` file has the following configurations:
 ```env
-PORT=5000
+PORT=5002
 ```
+
+> [!TIP]
+> **macOS Users**: If you encounter a `CORS` or `Connection Refused` error on port 5000, it is likely due to the "AirPlay Receiver" service. We recommend using port **5002** as configured above.
 
 ### 3. Running the Project
 You will need two separate terminal windows.
