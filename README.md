@@ -1,6 +1,6 @@
 # ALLCRYPT
 
-**ALLCRYPT is a full-stack web application built using the MERN stack for secure data encryption and decryption. It supports multiple symmetric encryption algorithms such as AES (256/192/128) and DES, allowing users to process data securely. The application is designed with a modern interface and focuses on efficient handling of encryption workflows.
+**ALLCRYPT** is an open, modern React/Node-stack encryption utility built for secure data transmission. It features military-grade encryption algorithms (AES-256, AES-192, AES-128) and a stunning premium UI with glassmorphism and adaptable dark/light mode aesthetics. 
 
 ## Features
 - **Open Access**: No login or authentication required. Simply generate a key and encrypt.
@@ -9,8 +9,10 @@
 - **Password-Derived Keys**: Utilizes `scrypt` to securely hash custom passwords into exact byte-length keys.
 - **File Encryption**: Drag and drop any file to securely encrypt it using Node streams and `multer`.
 - **Password Strength Meter**: Real-time visual feedback confirming key security and complexity.
-- **QR Code Generation**: Instantly generates scannable QR codes for encrypted text to share via mobile.
+- **QR Code Generation & Download**: Instantly generates scannable QR codes for encrypted text to share via mobile, including an option to download the QR code directly.
 - **Interactive About Guide**: Includes a built-in Glassmorphism modal explaining fundamental encryption mechanics instantly to new users.
+- **Secure URL Option**: Generate secure, sharable URLs to safely transmit encrypted data.
+- **Light & Dark Themes**: Fully implemented theme toggle logic with adaptable CSS variables for a seamless experience in both dark and light modes.
 
 ## Tech Stack
 - **Frontend**: React.js, Vite, Vanilla CSS (Glassmorphism design), Framer Motion, Axios
@@ -19,7 +21,7 @@
 ## Getting Started
 
 ### Prerequisites
-Make sure you have Node.js and MongoDB installed on your local machine.
+Make sure you have Node.js installed on your local machine. (Note: The application is now fully stateless and MongoDB is no longer required).
 
 ### 1. Installation
 Clone the repository and install dependencies for both the client and server.
