@@ -14,6 +14,38 @@
 - **Secure URL Redirection**: Create password-protected, encrypted short links with optional expiration timers and "one-time access" (burn-after-reading) capabilities.
 - **Light & Dark Themes**: Premium UI with a fully functional theme toggle and adaptable CSS variables for a seamless glassmorphism experience.
 
+## System Architecture
+
+ALLCRYPT operates on a hybrid architecture designed for both maximum privacy (stateless) and secure persistent sharing (stateful).
+
+```mermaid
+graph TD
+    Client[React Frontend / Vite] <-->|AES Payload / JSON| Server[Node.js / Express Backend]
+    Server <-->|Native Crypto API| AES[AES-256-CBC Engine]
+    Server <-->|Mongoose| DB[(MongoDB)]
+    Client ---|scrypt| KDF[Key Derivation]
+    
+    subgraph "Core Security"
+    AES
+    KDF
+    end
+    
+    subgraph "Stateless Flow"
+    Client -->|File Streams| Server
+    Server -->|Encrypted Blob| Client
+    end
+    
+    subgraph "Stateful Flow (Secure URLs)"
+    Server -->|Encrypted Metadata| DB
+    end
+```
+
+### Technical Design
+- **Stateless Encryption**: Core text and file encryption tasks are handled in-memory using Node.js `crypto` streams. No data from these operations is ever persisted to a database.
+- **Stateful Secure Links**: For the "Secure URL" feature, metadata is encrypted using a server-side `ENCRYPTION_SECRET` and stored in MongoDB with automatic TTL (Time-To-Live) expiration.
+- **Cryptographic Standards**: Uses `AES-256-CBC` for encryption, `scrypt` for key derivation from user passwords, and `bcrypt` for secure storage of link-access passwords.
+- **Performance**: Large file encryption is handled via Node.js **Read/Write Streams**, ensuring minimal memory footprint regardless of file size.
+
 ## Tech Stack
 - **Frontend**: React.js, Vite, Vanilla CSS (Glassmorphism design), Framer Motion, Axios
 - **Backend**: Node.js, Express.js, native `crypto` API
